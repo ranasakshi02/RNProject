@@ -12,11 +12,12 @@ import React, {useEffect, useState} from 'react';
 import {styles} from './styles';
 import CustomInput from '../../../components/CustomInput';
 import CustomButton from '../../../components/CustomButton';
+import { WHITE_COLOR } from '../../../utils/ColorConstants';
 
 const SignIn = ({navigation}) => {
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <StatusBar backgroundColor={'#fff'} barStyle="dark-content" />
+      <StatusBar backgroundColor={WHITE_COLOR} barStyle="dark-content" />
       <View style={styles.container}>
         <Text style={styles.textstyle}>Sign In</Text>
         <CustomInput placeholder="Enter Email" keyboardType={'email-address'} />

@@ -1,5 +1,6 @@
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 import React from 'react';
+import { BLACK_COLOR } from '../utils/ColorConstants';
 
 const CustomInput = props => {
   return (
@@ -25,7 +26,7 @@ const styles = StyleSheet.create({
   },
   inputStyle: {
     marginStart: 10,
-    color: '#000',
+    color: BLACK_COLOR,
     fontSize: 15,
     fontWeight: '500',
   },

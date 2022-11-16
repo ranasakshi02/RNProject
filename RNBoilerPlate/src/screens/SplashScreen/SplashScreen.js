@@ -2,6 +2,7 @@ import {StatusBar, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {styles} from './styles';
+import { PRIMARY_COLOR } from '../../utils/ColorConstants';
 
 const SplashScreen = ({navigation}) => {
   useEffect(() => {
@@ -12,7 +13,7 @@ const SplashScreen = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <StatusBar backgroundColor={'#12ec69'} barStyle="dark-content" />
+      <StatusBar backgroundColor={PRIMARY_COLOR} barStyle="dark-content" />
       <Text style={styles.textstyle}>Splash Screen</Text>
     </SafeAreaView>
   );

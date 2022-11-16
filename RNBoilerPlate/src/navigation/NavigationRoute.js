@@ -1,10 +1,10 @@
-import {View, Text} from 'react-native';
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import SplashScreen from '../screens/SplashScreen/SplashScreen';
 import SignIn from '../screens/Auth/SignIn/SignIn';
 import DashBoardScreen from '../screens/DashBoard/DashBoardScreen';
 import SignUp from '../screens/Auth/SignUp/SignUp';
+import {PRIMARY_COLOR} from '../utils/ColorConstants';
 const AuthRoute = () => {
   const AuthStack = createStackNavigator();
   return (
@@ -35,7 +35,7 @@ const NavigationRoute = () => {
         options={{
           headerShown: true,
           headerStyle: {
-            backgroundColor: '#12ec69',
+            backgroundColor: PRIMARY_COLOR,
           },
         }}
       />

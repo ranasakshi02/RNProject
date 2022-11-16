@@ -10,11 +10,12 @@ import React from 'react';
 import CustomInput from '../../../components/CustomInput';
 import CustomButton from '../../../components/CustomButton';
 import {styles} from './styles';
+import { WHITE_COLOR } from '../../../utils/ColorConstants';
 
 const SignUp = () => {
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <StatusBar backgroundColor={'#fff'} barStyle="dark-content" />
+      <StatusBar backgroundColor={WHITE_COLOR} barStyle="dark-content" />
       <View style={styles.container}>
         <Text style={styles.textstyle}>Sign Up</Text>
 
