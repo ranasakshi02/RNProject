@@ -1,6 +1,6 @@
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 import React from 'react';
-import { BLACK_COLOR } from '../utils/ColorConstants';
+import {BLACK_COLOR} from '../utils/ColorConstants';
 
 const CustomInput = props => {
   return (
@@ -10,6 +10,7 @@ const CustomInput = props => {
         style={[props.customStyle, styles.inputStyle]}
         keyboardType={props.keyboardType}
         secureTextEntry={props.secureTextEntry}
+        onChangeText={props.onChangeText}
       />
     </View>
   );

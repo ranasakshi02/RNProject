@@ -30,10 +30,13 @@ function* signIn(action) {
       action.payload,
       'api/authaccount/login',
     );
-    if (Boolean(data?.error)) {
+    console.log('data', data);
+
+    if (Boolean(data?.code === 1)) {
+      action.callback(data);
       yield put({
         type: `${SIGN_IN}_${FAIL}`,
-        payload: data.data,
+        payload: data,
       });
     } else {
       action.callback(data.data);
@@ -43,12 +46,7 @@ function* signIn(action) {
       });
     }
   } catch (err) {
-    console.log(
-      err?.response?.data?.message
-        ? err?.response?.data?.message
-        : 'something went wrong',
-    );
-    action.callback({err: true});
+    console.log('something went wrong');
   }
 }
 

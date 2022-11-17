@@ -4,7 +4,8 @@ import SplashScreen from '../screens/SplashScreen/SplashScreen';
 import SignIn from '../screens/Auth/SignIn/SignIn';
 import DashBoardScreen from '../screens/DashBoard/DashBoardScreen';
 import SignUp from '../screens/Auth/SignUp/SignUp';
-import {PRIMARY_COLOR} from '../utils/ColorConstants';
+import {Color, PRIMARY_COLOR} from '../utils/ColorConstants';
+import {Text} from 'react-native';
 const AuthRoute = () => {
   const AuthStack = createStackNavigator();
   return (
@@ -32,12 +33,13 @@ const NavigationRoute = () => {
       <Stack.Screen
         name="DashBoardScreen"
         component={DashBoardScreen}
-        options={{
+        options={({navigation}) => ({
           headerShown: true,
           headerStyle: {
-            backgroundColor: PRIMARY_COLOR,
+            backgroundColor: Color.PRIMARY_COLOR,
           },
-        }}
+          headerRight: () =>{},
+        })}
       />
     </Stack.Navigator>
   );
