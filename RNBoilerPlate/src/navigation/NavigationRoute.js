@@ -11,6 +11,7 @@ const AuthRoute = () => {
   const AuthStack = createStackNavigator();
   return (
     <AuthStack.Navigator
+      initialRouteName="SignIn"
       screenOptions={{
         headerShown: false,
         headerShadowVisible: false,

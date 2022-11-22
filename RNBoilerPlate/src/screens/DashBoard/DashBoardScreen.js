@@ -20,12 +20,6 @@ const mapStateToProps = state => {
   return {state};
 };
 const mapDispatchToProps = dispatch => ({
-  logout: callback => {
-    dispatch({
-      type: `${LOGOUT}_${REQUEST}`,
-      callback,
-    });
-  },
   getUserList: (Token, page, callback) => {
     dispatch({
       type: `${GET_USER_LIST}_${REQUEST}`,
@@ -39,13 +33,9 @@ const mapDispatchToProps = dispatch => ({
 const DashBoardScreen = ({navigation, logout, getUserList, state}) => {
   let {Token} = state?.AuthReducer;
   var [userListData, setuserListData] = useState();
-
   const [count, setcount] = useState(-1);
-  const onPressLogout = () => {
-    // logout(() => {
-    //   navigation.replace('SettingScreen');
-    // });
-    navigation.replace('SettingScreen');
+  const onPressSettings = () => {
+    navigation.navigate('SettingScreen');
   };
   useEffect(() => {
     navigation.setOptions({
@@ -56,7 +46,7 @@ const DashBoardScreen = ({navigation, logout, getUserList, state}) => {
             marginEnd: 10,
             alignItems: 'center',
           }}
-          onPress={() => onPressLogout()}>
+          onPress={() => onPressSettings()}>
           <Image
             source={require('../../../assets/images/settings.png')}
             style={styles.image}
@@ -64,7 +54,12 @@ const DashBoardScreen = ({navigation, logout, getUserList, state}) => {
         </TouchableOpacity>
       ),
     });
-  }, [navigation]);
+  }, []);
+  useEffect(() => {
+    userListData = [];
+    countPage = 1;
+    fetchUserData();
+  }, [Token]);
   const fetchUserData = () => {
     getUserList(Token, countPage, res => {
       userListData = userListData.concat(res?.data);
@@ -72,11 +67,6 @@ const DashBoardScreen = ({navigation, logout, getUserList, state}) => {
       setcount(res?.totalrecord);
     });
   };
-  useEffect(() => {
-    userListData = [];
-    countPage = 1;
-    fetchUserData();
-  }, []);
 
   console.log('===', userListData);
 

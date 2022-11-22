@@ -10,3 +10,6 @@ export const LOGOUT = 'LOGOUT';
 //Dashboard
 export const GET_USER_LIST = 'GET_USER_LIST';
 export const GET_USER_DETAILS = 'GET_USER_DETAILS';
+
+//Theme
+export const TOGGLE_THEME = 'TOGGLE_THEME';

@@ -83,7 +83,7 @@ function* logout(action) {
       payload: {isLogout: true},
     });
   } catch (err) {
-    action.callback({err: true});
+    action.callback();
     console.log('LOGOUT:', err);
   }
 }
