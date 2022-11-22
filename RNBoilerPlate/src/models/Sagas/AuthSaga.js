@@ -30,7 +30,6 @@ function* signIn(action) {
       action.payload,
       'api/authaccount/login',
     );
-    console.log('data', data);
 
     if (Boolean(data?.code === 1)) {
       action.callback(data);
@@ -50,8 +49,33 @@ function* signIn(action) {
   }
 }
 
+function* signUp(action) {
+  try {
+    let {data} = yield call(
+      postApiFlow,
+      action.payload,
+      'api/authaccount/registration',
+    );
+
+    if (data?.code === 1) {
+      action.callback(data);
+      yield put({
+        type: `${SIGN_UP}_${FAIL}`,
+        payload: data,
+      });
+    } else {
+      action.callback(data.data);
+      yield put({
+        type: `${SIGN_UP}_${SUCCESS}`,
+        payload: data.data,
+      });
+    }
+  } catch (err) {
+    console.log('something went wrong');
+  }
+}
+
 function* logout(action) {
-  console.log('action', action);
   try {
     action.callback();
     yield put({
@@ -66,6 +90,7 @@ function* logout(action) {
 export default function* root() {
   yield all([
     takeEvery(`${SIGN_IN}_${REQUEST}`, signIn),
+    takeEvery(`${SIGN_UP}_${REQUEST}`, signUp),
     takeEvery(`${LOGOUT}_${REQUEST}`, logout),
   ]);
 }

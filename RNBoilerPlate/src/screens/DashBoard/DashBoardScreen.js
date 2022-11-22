@@ -8,16 +8,15 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {styles} from './styles';
 import data from '../../dummyData/UserList.json';
 import UserListItem from '../../components/CustomCardComponents/UserListItem';
 import {Color, PRIMARY_COLOR} from '../../utils/ColorConstants';
-import {LOGOUT, REQUEST} from '../../models/Actions/Actions';
-import { connect } from 'react-redux';
+import {GET_USER_LIST, LOGOUT, REQUEST} from '../../models/Actions/Actions';
+import {connect} from 'react-redux';
+let countPage = 1;
 const mapStateToProps = state => {
-  console.log(state);
-
   return {state};
 };
 const mapDispatchToProps = dispatch => ({
@@ -27,14 +26,26 @@ const mapDispatchToProps = dispatch => ({
       callback,
     });
   },
+  getUserList: (Token, page, callback) => {
+    dispatch({
+      type: `${GET_USER_LIST}_${REQUEST}`,
+      Token,
+      page,
+      callback,
+    });
+  },
 });
 
-const DashBoardScreen = ({navigation, logout}) => {
-  //   var data = ['1', '1', '1', '1', '1', '1', '1', '1'];
+const DashBoardScreen = ({navigation, logout, getUserList, state}) => {
+  let {Token} = state?.AuthReducer;
+  var [userListData, setuserListData] = useState();
+
+  const [count, setcount] = useState(-1);
   const onPressLogout = () => {
-    logout(() => {
-      navigation.replace('AuthRoute', {screen: 'SignIn'});
-    });
+    // logout(() => {
+    //   navigation.replace('SettingScreen');
+    // });
+    navigation.replace('SettingScreen');
   };
   useEffect(() => {
     navigation.setOptions({
@@ -47,13 +58,28 @@ const DashBoardScreen = ({navigation, logout}) => {
           }}
           onPress={() => onPressLogout()}>
           <Image
-            source={require('../../../assets/images/logout.png')}
+            source={require('../../../assets/images/settings.png')}
             style={styles.image}
           />
         </TouchableOpacity>
       ),
     });
   }, [navigation]);
+  const fetchUserData = () => {
+    getUserList(Token, countPage, res => {
+      userListData = userListData.concat(res?.data);
+      setuserListData(userListData);
+      setcount(res?.totalrecord);
+    });
+  };
+  useEffect(() => {
+    userListData = [];
+    countPage = 1;
+    fetchUserData();
+  }, []);
+
+  console.log('===', userListData);
+
   return (
     <SafeAreaView style={styles.mainContainer}>
       <StatusBar
@@ -61,7 +87,16 @@ const DashBoardScreen = ({navigation, logout}) => {
         barStyle="dark-content"
       />
       <Text style={styles.textstyle}>User List</Text>
-      <FlatList data={data} renderItem={item => <UserListItem item={item} />} />
+      <FlatList
+        data={userListData}
+        renderItem={item => <UserListItem item={item} />}
+        onEndReached={() => {
+          countPage++;
+          if (count !== userListData?.length) {
+            fetchUserData();
+          }
+        }}
+      />
     </SafeAreaView>
   );
 };

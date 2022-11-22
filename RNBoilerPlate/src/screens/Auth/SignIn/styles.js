@@ -1,16 +1,16 @@
 import {StyleSheet} from 'react-native';
-import { BLACK_COLOR, WHITE_COLOR } from '../../../utils/ColorConstants';
+import {BLACK_COLOR, Color, WHITE_COLOR} from '../../../utils/ColorConstants';
 export const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: WHITE_COLOR,
+    backgroundColor: Color.WHITE_COLOR,
   },
   container: {
     marginHorizontal: 16,
   },
   textstyle: {
-    color: BLACK_COLOR,
+    color: Color.BLACK_COLOR,
     fontSize: 20,
     textAlign: 'center',
     fontWeight: 'bold',

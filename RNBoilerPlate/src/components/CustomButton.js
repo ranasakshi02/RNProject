@@ -4,7 +4,6 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import {BLACK_COLOR, Color, PRIMARY_COLOR} from '../utils/ColorConstants';
 
 const CustomButton = props => {
-  console.log(props.opacity);
 
   return (
     <TouchableOpacity
@@ -14,7 +13,7 @@ const CustomButton = props => {
         {opacity: props.opacity ? props.opacity : 1},
       ]}
       onPress={props.onPress}
-      activeOpacity={props.activeOpacity}
+      activeOpacity={0.8}
       disabled={props.disabled}>
       <Text style={[props.textStyle, styles.btnText]}>{props.lable}</Text>
     </TouchableOpacity>

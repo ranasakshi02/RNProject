@@ -12,22 +12,21 @@ import CustomButton from '../../../components/CustomButton';
 import {styles} from './styles';
 import {WHITE_COLOR} from '../../../utils/ColorConstants';
 import {connect} from 'react-redux';
+import {REQUEST, SIGN_UP} from '../../../models/Actions/Actions';
 
 const mapStateToProps = state => {
-  console.log(state);
-
   return {state};
 };
 const mapDispatchToProps = dispatch => ({
-  // signIn: (payload, callback) => {
-  //   dispatch({
-  //     type: `${SIGN_IN}_${REQUEST}`,
-  //     payload,
-  //     callback,
-  //   });
-  // },
+  signUp: (payload, callback) => {
+    dispatch({
+      type: `${SIGN_UP}_${REQUEST}`,
+      payload,
+      callback,
+    });
+  },
 });
-const SignUp = ({naviagtion}) => {
+const SignUp = ({navigation, signUp}) => {
   const [userData, setuserData] = useState({
     name: '',
     email: '',
@@ -35,7 +34,13 @@ const SignUp = ({naviagtion}) => {
   });
 
   const onPressSignUp = () => {
-    console.log(userData);
+    signUp(userData, res => {
+      if (res?.code === 1) {
+        alert(res?.message);
+      } else {
+        navigation.replace('AuthRoute', {screen: 'SignIn'});
+      }
+    });
   };
 
   return (
@@ -61,14 +66,13 @@ const SignUp = ({naviagtion}) => {
         <CustomButton
           lable="Sign Up"
           onPress={() => onPressSignUp()}
-          activeOpacity={0.8}
           disabled={
             userData?.email && userData?.password && userData?.name
               ? false
               : true
           }
           opacity={
-            userData?.email && userData?.password && userData?.name ? 1 : 0.8
+            userData?.email && userData?.password && userData?.name ? 1 : 0.5
           }
         />
         {/* <CustomButton

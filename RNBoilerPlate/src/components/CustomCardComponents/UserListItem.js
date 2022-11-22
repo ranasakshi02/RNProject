@@ -2,12 +2,6 @@ import {Image, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
 const UserListItem = ({item}) => {
-  // "id": 1,
-  // "name": "ashish thapliyal",
-  // "email": "Ashulive6123@gmail.com",
-  // "profilepicture": "https://www.adequatetravel.com/ATMultimedia/Images/1a30600f-3b07-4797-b883-981b455f2e84.png",
-  // "location": "USA",
-  // "createdat": "2020-04-26T12:21:05.7103885"
   return (
     <View style={styles.listViewStyle}>
       <View style={styles.containerView}>

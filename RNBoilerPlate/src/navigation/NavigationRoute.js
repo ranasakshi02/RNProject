@@ -6,6 +6,7 @@ import DashBoardScreen from '../screens/DashBoard/DashBoardScreen';
 import SignUp from '../screens/Auth/SignUp/SignUp';
 import {Color, PRIMARY_COLOR} from '../utils/ColorConstants';
 import {Text} from 'react-native';
+import SettingScreen from '../screens/Settings/SettingScreen';
 const AuthRoute = () => {
   const AuthStack = createStackNavigator();
   return (
@@ -38,7 +39,20 @@ const NavigationRoute = () => {
           headerStyle: {
             backgroundColor: Color.PRIMARY_COLOR,
           },
-          headerRight: () =>{},
+          headerRight: () => {},
+          title: 'DashBoard',
+        })}
+      />
+      <Stack.Screen
+        name="SettingScreen"
+        component={SettingScreen}
+        options={({navigation}) => ({
+          headerShown: true,
+          headerStyle: {
+            backgroundColor: Color.PRIMARY_COLOR,
+          },
+          headerTitleAlign: 'center',
+          title: 'Settings',
         })}
       />
     </Stack.Navigator>

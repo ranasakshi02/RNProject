@@ -5,12 +5,11 @@ import {styles} from './styles';
 import {Color, PRIMARY_COLOR} from '../../utils/ColorConstants';
 import {connect} from 'react-redux';
 const mapStateToProps = state => {
-  console.log('--', state);
   return {state};
 };
 const SplashScreen = ({navigation, state}) => {
   let {Token} = state?.AuthReducer;
-  console.log('token', Token);
+
   const [loaded, setloaded] = useState(false);
 
   setInterval(() => {
@@ -28,7 +27,10 @@ const SplashScreen = ({navigation, state}) => {
 
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <StatusBar backgroundColor={Color.PRIMARY_COLOR} barStyle="dark-content" />
+      <StatusBar
+        backgroundColor={Color.PRIMARY_COLOR}
+        barStyle="dark-content"
+      />
       <Text style={styles.textstyle}>Splash Screen</Text>
     </SafeAreaView>
   );

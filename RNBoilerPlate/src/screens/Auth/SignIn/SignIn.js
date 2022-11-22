@@ -14,8 +14,7 @@ import {REQUEST, SIGN_IN} from '../../../models/Actions/Actions';
 import {connect} from 'react-redux';
 
 const mapStateToProps = state => {
-  console.log(state);
-
+  
   return {state};
 };
 const mapDispatchToProps = dispatch => ({
@@ -35,9 +34,7 @@ const SignIn = ({navigation, signIn}) => {
   });
 
   const onPressSignIn = () => {
-    console.log('first', userData);
     signIn(userData, res => {
-      console.log('Sign In Success', res);
       if (res?.code === 1) {
         alert(res?.message);
       } else {
@@ -64,9 +61,8 @@ const SignIn = ({navigation, signIn}) => {
         <CustomButton
           lable="Sign In"
           onPress={() => onPressSignIn()}
-          activeOpacity={0.8}
-          disabled={userData?.email && userData?.password ? false : true}
-          opacity={userData?.email && userData?.password ? 1 : 0.8}
+          disabled={userData.email && userData.password ? false : true}
+          opacity={userData.email && userData.password ? 1 : 0.5}
         />
       </View>
       <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
