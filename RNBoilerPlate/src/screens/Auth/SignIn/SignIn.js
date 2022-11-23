@@ -1,17 +1,12 @@
-import {
-  SafeAreaView,
-  StatusBar,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import {SafeAreaView, TouchableOpacity, View} from 'react-native';
+import React, {useState} from 'react';
 import {styles} from './styles';
 import CustomInput from '../../../components/CustomInput';
 import CustomButton from '../../../components/CustomButton';
-import {BLACK_COLOR, Color, WHITE_COLOR} from '../../../utils/ColorConstants';
+import TextComponent from '../../../components/TextComponent';
 import {REQUEST, SIGN_IN} from '../../../models/Actions/Actions';
 import {connect} from 'react-redux';
+import {CommonActions} from '@react-navigation/native';
 
 const mapStateToProps = state => {
   return {state};
@@ -37,7 +32,12 @@ const SignIn = ({navigation, signIn}) => {
       if (res?.code === 1) {
         alert(res?.message);
       } else {
-        navigation.navigate('DashBoardScreen');
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [{name: 'DashBoardScreen'}],
+          }),
+        );
       }
     });
   };
@@ -45,7 +45,7 @@ const SignIn = ({navigation, signIn}) => {
   return (
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.container}>
-        <Text style={styles.textstyle}>Sign In</Text>
+        <TextComponent style={styles.textstyle}>Sign In</TextComponent>
         <CustomInput
           placeholder="Enter Email"
           keyboardType={'email-address'}
@@ -57,14 +57,16 @@ const SignIn = ({navigation, signIn}) => {
           onChangeText={value => setuserData({...userData, password: value})}
         />
         <CustomButton
-          lable="Sign In"
+          label="Sign In"
           onPress={() => onPressSignIn()}
           disabled={userData.email && userData.password ? false : true}
           opacity={userData.email && userData.password ? 1 : 0.5}
         />
       </View>
       <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-        <Text style={styles.signInTextStyle}>Don't Have Account? SignUp</Text>
+        <TextComponent style={styles.signInTextStyle} modify={true}>
+          Don't Have Account? SignUp
+        </TextComponent>
       </TouchableOpacity>
     </SafeAreaView>
   );

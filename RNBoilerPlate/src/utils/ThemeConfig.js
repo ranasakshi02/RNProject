@@ -12,7 +12,7 @@ export const CombinedDarkTheme = {
   ...NavigationDarkTheme,
   colors: {
     ...NavigationDarkTheme.colors,
-    background: ColorFunc().GREY_COLOR,
-    text: ColorFunc().WHITE_COLOR,
+    background: ColorFunc().GREY,
+    text: ColorFunc().WHITE,
   },
 };

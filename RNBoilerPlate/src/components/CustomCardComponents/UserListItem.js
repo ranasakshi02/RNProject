@@ -1,9 +1,11 @@
 import {Image, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import TextComponent from '../TextComponent';
+import {ColorFunc} from '../../utils/ColorConstants';
 
-const UserListItem = ({item}) => {
+const UserListItem = ({item, isDark}) => {
   return (
-    <View style={styles.listViewStyle}>
+    <View style={styles.listViewStyle(isDark)}>
       <View style={styles.containerView}>
         <View style={styles.imgView}>
           <Image
@@ -12,9 +14,15 @@ const UserListItem = ({item}) => {
           />
         </View>
         <View style={styles.textView}>
-          <Text style={styles.listTextStyle}>{item?.item?.name}</Text>
-          <Text style={styles.listTextStyle}>{item?.item?.email}</Text>
-          <Text style={styles.listTextStyle}>{item?.item?.location}</Text>
+          <TextComponent style={styles.listTextStyle}>
+            {item?.item?.name}
+          </TextComponent>
+          <TextComponent style={styles.listTextStyle}>
+            {item?.item?.email}
+          </TextComponent>
+          <TextComponent style={styles.listTextStyle}>
+            {item?.item?.location}
+          </TextComponent>
         </View>
       </View>
     </View>
@@ -24,23 +32,22 @@ const UserListItem = ({item}) => {
 export default UserListItem;
 
 const styles = StyleSheet.create({
-  listViewStyle: {
+  listViewStyle: isDark => ({
     borderRadius: 5,
     borderWidth: 1,
     marginHorizontal: 10,
     marginVertical: 10,
-    borderColor: '#c4c4c4',
-    backgroundColor: '#FAFAFA',
-  },
+    borderColor: isDark ? ColorFunc().LBC : ColorFunc().LIGHT_GREY,
+    backgroundColor: isDark ? ColorFunc().BLACK : ColorFunc().DIM_WHITE,
+  }),
   listTextStyle: {
     marginStart: 7,
-    color: '#4f4f4f',
     fontSize: 15,
     fontWeight: '500',
     marginTop: 3,
   },
   imgView: {flex: 0.3, alignItems: 'center', marginTop: 3, marginBottom: 3},
-  img: {height: 70, width: 70, borderRadius: 50, backgroundColor: '#c4c4c4'},
+  img: {height: 70, width: 70, borderRadius: 50},
   containerView: {flexDirection: 'row'},
   textView: {flex: 0.7},
 });

@@ -1,14 +1,17 @@
-import {StatusBar, StyleSheet, Text, View} from 'react-native';
+import {Text} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {styles} from './styles';
-import {Color, PRIMARY_COLOR} from '../../utils/ColorConstants';
 import {connect} from 'react-redux';
+import {CommonActions} from '@react-navigation/native';
+import TextComponent from '../../components/TextComponent';
+
 const mapStateToProps = state => {
   return {state};
 };
 const SplashScreen = ({navigation, state}) => {
   let {Token} = state?.AuthReducer;
+  let {isDark} = state?.ThemeReducer;
 
   const [loaded, setloaded] = useState(false);
 
@@ -18,16 +21,26 @@ const SplashScreen = ({navigation, state}) => {
   useEffect(() => {
     if (loaded) {
       if (Token) {
-        navigation.replace('DashBoardScreen');
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [{name: 'DashBoardScreen'}],
+          }),
+        );
       } else {
-        navigation.replace('AuthRoute', {screen: 'SignIn'});
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [{name: 'AuthRoute'}],
+          }),
+        );
       }
     }
   }, [loaded]);
 
   return (
-    <SafeAreaView style={styles.mainContainer}>
-      <Text style={styles.textstyle}>Splash Screen</Text>
+    <SafeAreaView style={styles.mainContainer(isDark)}>
+      <TextComponent style={styles.textstyle}>Splash Screen</TextComponent>
     </SafeAreaView>
   );
 };

@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {BLACK_COLOR, Color, WHITE_COLOR} from '../../utils/ColorConstants';
+import { ColorFunc } from '../../utils/ColorConstants';
 export const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
@@ -16,8 +16,9 @@ export const styles = StyleSheet.create({
     marginEnd: 10,
     alignItems: 'center',
   },
-  image: {
+  image: isDark => ({
+    tintColor: isDark ? ColorFunc().WHITE : ColorFunc().BLACK,
     width: 20,
     height: 20,
-  },
+  }),
 });

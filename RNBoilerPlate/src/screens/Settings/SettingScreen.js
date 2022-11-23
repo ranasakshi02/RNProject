@@ -1,6 +1,7 @@
 import {View, Text, SafeAreaView, TouchableOpacity, Image} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {styles} from './styles';
+import {CommonActions} from '@react-navigation/native';
 import CustomImageComponent from '../../components/CustomImageComponent';
 import {
   GET_USER_DETAILS,
@@ -11,6 +12,8 @@ import {
 import {connect} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import ToggleSwitch from 'toggle-switch-react-native';
+import TextComponent from '../../components/TextComponent';
+import {ColorFunc} from '../../utils/ColorConstants';
 const mapStateToProps = state => {
   return {state};
 };
@@ -56,11 +59,6 @@ const SettingScreen = ({
     apiHelper();
   }, []);
 
-  const onPressLogout = () => {
-    logout(() => {
-      navigation.navigate('AuthRoute', {screen: 'SignIn'});
-    });
-  };
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
@@ -73,12 +71,22 @@ const SettingScreen = ({
           onPress={() => onPressLogout()}>
           <Image
             source={require('../../../assets/images/logout.png')}
-            style={styles.image}
+            style={styles.image(ColorFunc().isDark)}
           />
         </TouchableOpacity>
       ),
     });
   }, []);
+  const onPressLogout = () => {
+    logout(() => {
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{name: 'AuthRoute', params: {screen: 'SignIn'}}],
+        }),
+      );
+    });
+  };
 
   const onPressToggle = isOn => {
     toggleTheme(isOn, res => {});
@@ -87,11 +95,13 @@ const SettingScreen = ({
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.subContainer}>
         <CustomImageComponent source={loginUserData?.profilepicture} />
-        <Text style={styles.textstyle}>{loginUserData?.name}</Text>
+        <TextComponent style={styles.textstyle}>
+          {loginUserData?.name}
+        </TextComponent>
         <View style={{marginTop: '10%'}}>
           <ToggleSwitch
             isOn={isDark}
-            onColor="green"
+            onColor={ColorFunc().PRIMARY}
             offColor="grey"
             label="Dark Theme"
             labelStyle={styles.toggleSwitchLabel(isDark)}

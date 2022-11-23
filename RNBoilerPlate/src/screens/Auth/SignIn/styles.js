@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {BLACK_COLOR, Color, WHITE_COLOR} from '../../../utils/ColorConstants';
+import {BLACK, Color, WHITE} from '../../../utils/ColorConstants';
 export const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,

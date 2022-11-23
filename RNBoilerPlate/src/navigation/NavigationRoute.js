@@ -4,7 +4,7 @@ import SplashScreen from '../screens/SplashScreen/SplashScreen';
 import SignIn from '../screens/Auth/SignIn/SignIn';
 import DashBoardScreen from '../screens/DashBoard/DashBoardScreen';
 import SignUp from '../screens/Auth/SignUp/SignUp';
-import {Color, ColorFunc} from '../utils/ColorConstants';
+import {ColorFunc} from '../utils/ColorConstants';
 import {connect} from 'react-redux';
 import {CombinedDarkTheme, CombinedDefaultTheme} from '../utils/ThemeConfig';
 import SettingScreen from '../screens/Settings/SettingScreen';
@@ -36,18 +36,26 @@ const NavigationRoute = ({state}) => {
     <NavigationContainer theme={combinedTheme}>
       <StatusBar
         barStyle={isDark ? 'light-content' : 'dark-content'}
-        backgroundColor={ColorFunc().PRIMARY_COLOR}
+        backgroundColor={ColorFunc().PRIMARY}
       />
       <Stack.Navigator
         screenOptions={{
           headerShown: true,
           headerShadowVisible: false,
           headerStyle: {
-            backgroundColor: ColorFunc().PRIMARY_COLOR,
+            backgroundColor: ColorFunc().PRIMARY,
           },
         }}>
-        <Stack.Screen name="SplashScreen" component={SplashScreen} />
-        <Stack.Screen name="AuthRoute" component={AuthRoute} />
+        <Stack.Screen
+          name="SplashScreen"
+          component={SplashScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="AuthRoute"
+          component={AuthRoute}
+          options={{headerShown: false}}
+        />
         <Stack.Screen
           name="DashBoardScreen"
           component={DashBoardScreen}

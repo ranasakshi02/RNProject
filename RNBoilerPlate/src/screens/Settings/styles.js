@@ -16,12 +16,13 @@ export const styles = StyleSheet.create({
     marginEnd: 10,
     alignItems: 'center',
   },
-  image: {
+  image: isDark => ({
+    tintColor: isDark ? ColorFunc().WHITE : ColorFunc().BLACK,
     width: 20,
     height: 20,
-  },
+  }),
   toggleSwitchLabel: isDark => ({
     fontWeight: '900',
-    color: isDark ? ColorFunc().WHITE_COLOR : ColorFunc().BLACK_COLOR,
+    color: isDark ? ColorFunc().WHITE : ColorFunc().BLACK,
   }),
 });

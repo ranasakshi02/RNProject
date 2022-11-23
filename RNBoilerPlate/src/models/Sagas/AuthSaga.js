@@ -80,7 +80,12 @@ function* logout(action) {
     action.callback();
     yield put({
       type: `${LOGOUT}_${SUCCESS}`,
-      payload: {isLogout: true},
+      payload: {
+        Id: undefined,
+        Name: undefined,
+        Email: undefined,
+        Token: undefined,
+      },
     });
   } catch (err) {
     action.callback();

@@ -1,7 +1,5 @@
 import {
   SafeAreaView,
-  StatusBar,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View,
@@ -10,9 +8,9 @@ import React, {useState} from 'react';
 import CustomInput from '../../../components/CustomInput';
 import CustomButton from '../../../components/CustomButton';
 import {styles} from './styles';
-import {WHITE_COLOR} from '../../../utils/ColorConstants';
 import {connect} from 'react-redux';
 import {REQUEST, SIGN_UP} from '../../../models/Actions/Actions';
+import TextComponent from '../../../components/TextComponent';
 
 const mapStateToProps = state => {
   return {state};
@@ -46,7 +44,7 @@ const SignUp = ({navigation, signUp}) => {
   return (
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.container}>
-        <Text style={styles.textstyle}>Sign Up</Text>
+        <TextComponent style={styles.textstyle}>Sign Up</TextComponent>
 
         <CustomInput
           placeholder="Enter Name"
@@ -63,7 +61,7 @@ const SignUp = ({navigation, signUp}) => {
           onChangeText={value => setuserData({...userData, password: value})}
         />
         <CustomButton
-          lable="Sign Up"
+          label="Sign Up"
           onPress={() => onPressSignUp()}
           disabled={
             userData?.email && userData?.password && userData?.name
@@ -75,15 +73,15 @@ const SignUp = ({navigation, signUp}) => {
           }
         />
         {/* <CustomButton
-          lable="Sign In"
+          label="Sign In"
           onPress={() => onPressSignIn()}
           activeOpacity={0.8}
           disabled={userData?.email && userData?.password ? false : true}
           opacity={userData?.email && userData?.password ? 1 : 0.8}
         /> */}
       </View>
-      <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-        <Text style={styles.signInTextStyle}>Already Have Account? SignIn</Text>
+      <TouchableOpacity onPress={() => navigation.replace('SignIn')}>
+        <TextComponent style={styles.signInTextStyle} modify={true}>Already Have Account? SignIn</TextComponent>
       </TouchableOpacity>
     </SafeAreaView>
   );
