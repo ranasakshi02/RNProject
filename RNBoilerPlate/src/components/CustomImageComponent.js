@@ -14,6 +14,7 @@ export default CustomImageComponent;
 const styles = StyleSheet.create({
   imgView: {
     borderRadius: 50,
+    backgroundColor: 'transparent',
   },
   img: {
     height: 100,

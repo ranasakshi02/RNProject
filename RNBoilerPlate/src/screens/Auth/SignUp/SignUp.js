@@ -45,7 +45,6 @@ const SignUp = ({navigation, signUp}) => {
 
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <StatusBar backgroundColor={WHITE_COLOR} barStyle="dark-content" />
       <View style={styles.container}>
         <Text style={styles.textstyle}>Sign Up</Text>
 

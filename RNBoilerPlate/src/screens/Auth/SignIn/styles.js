@@ -4,13 +4,11 @@ export const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: Color.WHITE_COLOR,
   },
   container: {
     marginHorizontal: 16,
   },
   textstyle: {
-    color: Color.BLACK_COLOR,
     fontSize: 20,
     textAlign: 'center',
     fontWeight: 'bold',

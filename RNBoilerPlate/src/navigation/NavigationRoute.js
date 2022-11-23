@@ -4,9 +4,16 @@ import SplashScreen from '../screens/SplashScreen/SplashScreen';
 import SignIn from '../screens/Auth/SignIn/SignIn';
 import DashBoardScreen from '../screens/DashBoard/DashBoardScreen';
 import SignUp from '../screens/Auth/SignUp/SignUp';
-import {Color, PRIMARY_COLOR} from '../utils/ColorConstants';
-import {Text} from 'react-native';
+import {Color, ColorFunc} from '../utils/ColorConstants';
+import {connect} from 'react-redux';
+import {CombinedDarkTheme, CombinedDefaultTheme} from '../utils/ThemeConfig';
 import SettingScreen from '../screens/Settings/SettingScreen';
+import {StatusBar} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+
+const mapStateToProps = state => {
+  return {state};
+};
 const AuthRoute = () => {
   const AuthStack = createStackNavigator();
   return (
@@ -21,43 +28,45 @@ const AuthRoute = () => {
     </AuthStack.Navigator>
   );
 };
-
-const NavigationRoute = () => {
+const NavigationRoute = ({state}) => {
   const Stack = createStackNavigator();
+  let {isDark} = state.ThemeReducer;
+  const combinedTheme = isDark ? CombinedDarkTheme : CombinedDefaultTheme;
   return (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-        headerShadowVisible: false,
-      }}>
-      <Stack.Screen name="SplashScreen" component={SplashScreen} />
-      <Stack.Screen name="AuthRoute" component={AuthRoute} />
-      <Stack.Screen
-        name="DashBoardScreen"
-        component={DashBoardScreen}
-        options={({navigation}) => ({
-          headerShown: true,
-          headerStyle: {
-            backgroundColor: Color.PRIMARY_COLOR,
-          },
-          headerRight: () => {},
-          title: 'DashBoard',
-        })}
+    <NavigationContainer theme={combinedTheme}>
+      <StatusBar
+        barStyle={isDark ? 'light-content' : 'dark-content'}
+        backgroundColor={ColorFunc().PRIMARY_COLOR}
       />
-      <Stack.Screen
-        name="SettingScreen"
-        component={SettingScreen}
-        options={({navigation}) => ({
+      <Stack.Navigator
+        screenOptions={{
           headerShown: true,
+          headerShadowVisible: false,
           headerStyle: {
-            backgroundColor: Color.PRIMARY_COLOR,
+            backgroundColor: ColorFunc().PRIMARY_COLOR,
           },
-          headerTitleAlign: 'center',
-          title: 'Settings',
-        })}
-      />
-    </Stack.Navigator>
+        }}>
+        <Stack.Screen name="SplashScreen" component={SplashScreen} />
+        <Stack.Screen name="AuthRoute" component={AuthRoute} />
+        <Stack.Screen
+          name="DashBoardScreen"
+          component={DashBoardScreen}
+          options={() => ({
+            title: 'DashBoard',
+          })}
+        />
+        <Stack.Screen
+          name="SettingScreen"
+          component={SettingScreen}
+          options={() => ({
+            headerTitleAlign: 'center',
+            title: 'Settings',
+          })}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
-export default NavigationRoute;
+const connectComponent = connect(mapStateToProps);
+export default connectComponent(NavigationRoute);

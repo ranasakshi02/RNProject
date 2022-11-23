@@ -1,14 +1,6 @@
-import {
-  View,
-  Text,
-  SafeAreaView,
-  StatusBar,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
+import {View, Text, SafeAreaView, TouchableOpacity, Image} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {styles} from './styles';
-import {Color} from '../../utils/ColorConstants';
 import CustomImageComponent from '../../components/CustomImageComponent';
 import {
   GET_USER_DETAILS,
@@ -37,11 +29,11 @@ const mapDispatchToProps = dispatch => ({
       callback,
     });
   },
-  toggleTheme: (isDark,callback) => {
+  toggleTheme: (isDark, callback) => {
     dispatch({
       type: `${TOGGLE_THEME}_${REQUEST}`,
       isDark,
-      callback
+      callback,
     });
   },
 });
@@ -87,20 +79,12 @@ const SettingScreen = ({
       ),
     });
   }, []);
-  console.log('isDark', state);
 
   const onPressToggle = isOn => {
-    toggleTheme(isOn,res=>{
-      console.log(res,"--");
-      
-    });
+    toggleTheme(isOn, res => {});
   };
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <StatusBar
-        backgroundColor={Color.PRIMARY_COLOR}
-        barStyle="dark-content"
-      />
       <View style={styles.subContainer}>
         <CustomImageComponent source={loginUserData?.profilepicture} />
         <Text style={styles.textstyle}>{loginUserData?.name}</Text>
@@ -110,7 +94,7 @@ const SettingScreen = ({
             onColor="green"
             offColor="grey"
             label="Dark Theme"
-            labelStyle={{color: 'black', fontWeight: '900'}}
+            labelStyle={styles.toggleSwitchLabel(isDark)}
             size="medium"
             onToggle={isOn => onPressToggle(isOn)}
           />

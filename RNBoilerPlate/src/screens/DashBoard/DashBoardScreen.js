@@ -72,10 +72,6 @@ const DashBoardScreen = ({navigation, logout, getUserList, state}) => {
 
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <StatusBar
-        backgroundColor={Color.PRIMARY_COLOR}
-        barStyle="dark-content"
-      />
       <Text style={styles.textstyle}>User List</Text>
       <FlatList
         data={userListData}

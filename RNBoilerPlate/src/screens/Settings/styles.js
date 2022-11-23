@@ -1,13 +1,11 @@
 import {StyleSheet} from 'react-native';
-import {Color} from '../../utils/ColorConstants';
+import {ColorFunc} from '../../utils/ColorConstants';
 export const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: Color.WHITE_COLOR,
   },
   subContainer: {marginTop: '10%', alignItems: 'center'},
   textstyle: {
-    color: Color.BLACK_COLOR,
     fontSize: 16,
     fontWeight: '500',
     textAlign: 'center',
@@ -22,4 +20,8 @@ export const styles = StyleSheet.create({
     width: 20,
     height: 20,
   },
+  toggleSwitchLabel: isDark => ({
+    fontWeight: '900',
+    color: isDark ? ColorFunc().WHITE_COLOR : ColorFunc().BLACK_COLOR,
+  }),
 });

@@ -27,10 +27,6 @@ const SplashScreen = ({navigation, state}) => {
 
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <StatusBar
-        backgroundColor={Color.PRIMARY_COLOR}
-        barStyle="dark-content"
-      />
       <Text style={styles.textstyle}>Splash Screen</Text>
     </SafeAreaView>
   );

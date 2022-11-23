@@ -14,7 +14,6 @@ import {REQUEST, SIGN_IN} from '../../../models/Actions/Actions';
 import {connect} from 'react-redux';
 
 const mapStateToProps = state => {
-  
   return {state};
 };
 const mapDispatchToProps = dispatch => ({
@@ -45,7 +44,6 @@ const SignIn = ({navigation, signIn}) => {
 
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <StatusBar backgroundColor={Color.WHITE_COLOR} barStyle="dark-content" />
       <View style={styles.container}>
         <Text style={styles.textstyle}>Sign In</Text>
         <CustomInput

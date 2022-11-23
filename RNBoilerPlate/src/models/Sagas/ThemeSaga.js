@@ -2,7 +2,6 @@ import {put, all, takeEvery} from 'redux-saga/effects';
 import {REQUEST, SUCCESS, TOGGLE_THEME} from '../Actions/Actions';
 
 function* toggleTheme(action) {
-  console.log(action.isDark);
 
   try {
     action.callback(action.isDark);

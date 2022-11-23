@@ -4,10 +4,8 @@ export const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: Color.WHITE_COLOR,
   },
   textstyle: {
-    color: Color.BLACK_COLOR,
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
