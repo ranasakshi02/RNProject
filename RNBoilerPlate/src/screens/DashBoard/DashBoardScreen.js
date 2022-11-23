@@ -2,19 +2,16 @@ import {
   FlatList,
   Image,
   SafeAreaView,
-  StatusBar,
-  StyleSheet,
   Text,
   TouchableOpacity,
-  View,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {styles} from './styles';
-import data from '../../dummyData/UserList.json';
 import UserListItem from '../../components/CustomCardComponents/UserListItem';
-import {Color, PRIMARY_COLOR} from '../../utils/ColorConstants';
-import {GET_USER_LIST, LOGOUT, REQUEST} from '../../models/Actions/Actions';
+import {GET_USER_LIST, REQUEST} from '../../models/Actions/Actions';
 import {connect} from 'react-redux';
+import TextComponent from '../../components/TextComponent';
+import { ColorFunc } from '../../utils/ColorConstants';
 let countPage = 1;
 const mapStateToProps = state => {
   return {state};
@@ -32,6 +29,7 @@ const mapDispatchToProps = dispatch => ({
 
 const DashBoardScreen = ({navigation, logout, getUserList, state}) => {
   let {Token} = state?.AuthReducer;
+  let isDark = state.ThemeReducer.isDark;
   var [userListData, setuserListData] = useState();
   const [count, setcount] = useState(-1);
   const onPressSettings = () => {
@@ -49,7 +47,7 @@ const DashBoardScreen = ({navigation, logout, getUserList, state}) => {
           onPress={() => onPressSettings()}>
           <Image
             source={require('../../../assets/images/settings.png')}
-            style={styles.image}
+            style={styles.image(ColorFunc().isDark)}
           />
         </TouchableOpacity>
       ),
@@ -68,14 +66,14 @@ const DashBoardScreen = ({navigation, logout, getUserList, state}) => {
     });
   };
 
-  console.log('===', userListData);
+  // console.log('===', userListData);
 
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <Text style={styles.textstyle}>User List</Text>
+      <TextComponent style={styles.textstyle}>User List</TextComponent>
       <FlatList
         data={userListData}
-        renderItem={item => <UserListItem item={item} />}
+        renderItem={item => <UserListItem item={item} isDark={isDark} />}
         onEndReached={() => {
           countPage++;
           if (count !== userListData?.length) {

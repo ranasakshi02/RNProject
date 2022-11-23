@@ -1,13 +1,16 @@
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 import React from 'react';
-import {BLACK_COLOR} from '../utils/ColorConstants';
+import {ColorFunc} from '../utils/ColorConstants';
 
 const CustomInput = props => {
   return (
     <View style={styles.inputContainer}>
       <TextInput
         placeholder={props.placeholder}
-        style={[props.customStyle, styles.inputStyle]}
+        placeholderTextColor={
+          ColorFunc().isDark ? ColorFunc().DIM_WHITE : ColorFunc().BLACK
+        }
+        style={[props.customStyle, styles.inputStyle(ColorFunc().isDark)]}
         keyboardType={props.keyboardType}
         secureTextEntry={props.secureTextEntry}
         onChangeText={props.onChangeText}
@@ -25,10 +28,10 @@ const styles = StyleSheet.create({
     borderColor: 'grey',
     marginTop: 10,
   },
-  inputStyle: {
+  inputStyle: (isDark) => ({
     marginStart: 10,
-    color: BLACK_COLOR,
+    color: isDark ? ColorFunc().WHITE : ColorFunc().BLACK,
     fontSize: 15,
     fontWeight: '500',
-  },
+  }),
 });
