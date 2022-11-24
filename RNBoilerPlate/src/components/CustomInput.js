@@ -8,12 +8,13 @@ const CustomInput = props => {
       <TextInput
         placeholder={props.placeholder}
         placeholderTextColor={
-          ColorFunc().isDark ? ColorFunc().DIM_WHITE : ColorFunc().BLACK
+          ColorFunc().isDark ? ColorFunc().DIM_WHITE : ColorFunc().PLACE_HOLDER_COLOR
         }
         style={[props.customStyle, styles.inputStyle(ColorFunc().isDark)]}
         keyboardType={props.keyboardType}
         secureTextEntry={props.secureTextEntry}
         onChangeText={props.onChangeText}
+        defaultValue={props.defaultValue}
       />
     </View>
   );
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
     borderColor: 'grey',
     marginTop: 10,
   },
-  inputStyle: (isDark) => ({
+  inputStyle: isDark => ({
     marginStart: 10,
     color: isDark ? ColorFunc().WHITE : ColorFunc().BLACK,
     fontSize: 15,

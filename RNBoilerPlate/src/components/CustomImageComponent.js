@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
   imgView: {
     borderRadius: 50,
     backgroundColor: 'transparent',
+    alignItems: 'center',
   },
   img: {
     height: 100,

@@ -14,6 +14,9 @@ import {useNavigation} from '@react-navigation/native';
 import ToggleSwitch from 'toggle-switch-react-native';
 import TextComponent from '../../components/TextComponent';
 import {ColorFunc} from '../../utils/ColorConstants';
+import CustomInput from '../../components/CustomInput';
+import CustomButton from '../../components/CustomButton';
+
 const mapStateToProps = state => {
   return {state};
 };
@@ -92,22 +95,40 @@ const SettingScreen = ({
     toggleTheme(isOn, res => {});
   };
   return (
-    <SafeAreaView style={styles.mainContainer}>
+    <SafeAreaView style={styles.mainContainer(isDark)}>
       <View style={styles.subContainer}>
         <CustomImageComponent source={loginUserData?.profilepicture} />
         <TextComponent style={styles.textstyle}>
           {loginUserData?.name}
         </TextComponent>
-        <View style={{marginTop: '10%'}}>
-          <ToggleSwitch
-            isOn={isDark}
-            onColor={ColorFunc().PRIMARY}
-            offColor="grey"
-            label="Dark Theme"
-            labelStyle={styles.toggleSwitchLabel(isDark)}
-            size="medium"
-            onToggle={isOn => onPressToggle(isOn)}
+        <View style={{marginTop: '5%', marginHorizontal: '5%'}}>
+          <View style={{alignItems: 'center', marginBottom: '5%'}}>
+            <ToggleSwitch
+              isOn={isDark}
+              onColor={ColorFunc().PRIMARY}
+              offColor="grey"
+              label="Dark Theme"
+              labelStyle={styles.toggleSwitchLabel(isDark)}
+              size="medium"
+              onToggle={isOn => onPressToggle(isOn)}
+            />
+          </View>
+          <CustomInput
+            placeholder={
+              loginUserData?.name ? loginUserData?.name : 'Enter Your Name'
+            }
           />
+          <CustomInput
+            placeholder={
+              loginUserData?.name ? loginUserData?.email : 'Enter Your Name'
+            }
+          />
+          <CustomInput
+            placeholder={
+              loginUserData?.name ? loginUserData?.location : 'Enter Your Name'
+            }
+          />
+          <CustomButton label="Update Profile" />
         </View>
       </View>
     </SafeAreaView>

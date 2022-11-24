@@ -11,7 +11,7 @@ import UserListItem from '../../components/CustomCardComponents/UserListItem';
 import {GET_USER_LIST, REQUEST} from '../../models/Actions/Actions';
 import {connect} from 'react-redux';
 import TextComponent from '../../components/TextComponent';
-import { ColorFunc } from '../../utils/ColorConstants';
+import {ColorFunc} from '../../utils/ColorConstants';
 let countPage = 1;
 const mapStateToProps = state => {
   return {state};
@@ -69,7 +69,7 @@ const DashBoardScreen = ({navigation, logout, getUserList, state}) => {
   // console.log('===', userListData);
 
   return (
-    <SafeAreaView style={styles.mainContainer}>
+    <SafeAreaView style={styles.mainContainer(isDark)}>
       <TextComponent style={styles.textstyle}>User List</TextComponent>
       <FlatList
         data={userListData}

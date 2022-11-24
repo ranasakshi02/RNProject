@@ -1,10 +1,11 @@
 import {StyleSheet} from 'react-native';
 import {ColorFunc} from '../../utils/ColorConstants';
 export const styles = StyleSheet.create({
-  mainContainer: {
+  mainContainer: isDark => ({
     flex: 1,
-  },
-  subContainer: {marginTop: '10%', alignItems: 'center'},
+    backgroundColor: isDark ? ColorFunc().GREY : ColorFunc().WHITE,
+  }),
+  subContainer: {marginTop: '10%'},
   textstyle: {
     fontSize: 16,
     fontWeight: '500',

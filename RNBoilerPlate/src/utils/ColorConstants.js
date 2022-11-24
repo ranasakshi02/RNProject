@@ -10,6 +10,7 @@ export function ColorFunc() {
     GREY: '#303030',
     LIGHT_GREY: '#c4c4c4',
     DIM_WHITE: '#FAFAFA',
+    PLACE_HOLDER_COLOR: '#939090',
     isDark,
   };
 }

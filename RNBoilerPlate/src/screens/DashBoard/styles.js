@@ -1,10 +1,11 @@
 import {StyleSheet} from 'react-native';
-import { ColorFunc } from '../../utils/ColorConstants';
+import {ColorFunc} from '../../utils/ColorConstants';
 export const styles = StyleSheet.create({
-  mainContainer: {
+  mainContainer: isDark => ({
     flex: 1,
     justifyContent: 'center',
-  },
+    backgroundColor: isDark ? ColorFunc().GREY : ColorFunc().WHITE,
+  }),
   textstyle: {
     fontSize: 20,
     fontWeight: 'bold',
